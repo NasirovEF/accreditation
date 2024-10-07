@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 from sale.apps import SaleConfig
-from sale.views import FactoryViewSet, RetailViewSet, ProductViewSet, IndEntreprViewSet
+from sale.views import FactoryViewSet, RetailViewSet, ProductViewSet, IndEntreprViewSet, ContactViewSet
 
 app_name = SaleConfig.name
 
@@ -10,5 +10,6 @@ router.register(r'factory', FactoryViewSet, basename='factory')
 router.register(r'retail', RetailViewSet, basename='retail')
 router.register(r'indentrepr', IndEntreprViewSet, basename='indentrepr')
 router.register(r'product', ProductViewSet, basename='product')
+router.register(r'contacts', ContactViewSet, basename='contacts')
 
 urlpatterns = [] + router.urls
