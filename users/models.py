@@ -7,7 +7,7 @@ from users.services import NULLABLE
 class User(AbstractUser):
     """Модель пользователя"""
 
-    username = models.CharField(max_length=15, verbose_name="Имя пользователя")
+    username = models.CharField(max_length=15, verbose_name="Имя пользователя", unique=True)
     email = models.EmailField(verbose_name="Email", unique=True)
     phone_number = models.CharField(
         max_length=25, verbose_name="Номер телефона", **NULLABLE
