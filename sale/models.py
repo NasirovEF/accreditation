@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib import admin
 from users.services import NULLABLE
 
 
@@ -38,6 +38,10 @@ class Factory(models.Model):
     contacts = models.OneToOneField(Contacts, on_delete=models.CASCADE, verbose_name="Контакты", related_name="company")
     products = models.ForeignKey(Product, verbose_name="Продукты", related_name="seller", on_delete=models.SET_NULL, **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+
+    @admin.display(description="Город")
+    def city_name(self):
+        return self.contacts.city
 
     class Meta:
         verbose_name = "Фабрика"
