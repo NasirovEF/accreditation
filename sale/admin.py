@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import reverse
+from django.utils.html import format_html
 from sale.models import Product, Factory, Retail, IndEntrepr, Contacts
 
 admin.site.register(Product)
@@ -36,21 +36,16 @@ class FactoryAdmin(admin.ModelAdmin):
 
 @admin.register(Retail)
 class RetailAdmin(admin.ModelAdmin):
-    list_display = ("name", "contacts", "created_at", "supplier", "arrears",)
+    list_display = ("name", "contacts", "arrears", "supplier")
     search_fields = ("name", "contacts", "created_at", "city_name")
+    list_display_links = ("name", "supplier")
     list_filter = (CityFilter, "name")
     actions = [clear_arrears]
-
-    def get_supplier_url(self, obj):
-        return u''.format(reverse("admin:sale_factory_change", args=[obj.supplier.pk]), obj.supplier)
-    get_supplier_url.short_description = "Поставщик"
-    get_supplier_url.admin_order_field = "supplier"
-    get_supplier_url.allow_tags = True
-
 
 
 @admin.register(IndEntrepr)
 class IndEntreprAdmin(admin.ModelAdmin):
     list_display = ("name", "contacts", "created_at", "supplier", "arrears")
+    list_display_links = ("name", "supplier")
     search_fields = ("name", "contacts", "created_at", "city_name")
     actions = [clear_arrears]
